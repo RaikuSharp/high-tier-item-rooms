@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xml-model href="https://wofsauge.github.io/isaac-xml-validator/xsd/metadata.xsd" ?>
+<metadata>
+  <name>higher-tier-item-rooms</name>
+  <directory>higher-tier-item-rooms</directory>
+  <description>higher-tier-item-rooms is a currently a work in progress.</description>
+  <version>1.0</version>
+  <visibility />
+</metadata>
