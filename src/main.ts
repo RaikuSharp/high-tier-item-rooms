@@ -151,7 +151,7 @@ if (ModConfigMenu !== undefined) {
 
 function getItem(itemPoolType: ItemPoolType, decrease: boolean, seed: Seed) {
   let foundItem = false;
-  let item = undefined;
+  let item: Readonly<ItemConfigItemCollectible> | undefined;
 
   while (!foundItem) {
     let collectible = game

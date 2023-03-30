@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <?xml-model href="https://wofsauge.github.io/isaac-xml-validator/xsd/metadata.xsd" ?>
 <metadata>
-  <name>higher-tier-item-rooms</name>
+  <name>Higher Tier Item Rooms</name>
   <directory>higher-tier-item-rooms</directory>
-  <description>higher-tier-item-rooms is a currently a work in progress.</description>
-  <version>1.0</version>
+  <id>2950589929</id>
+  <description>A modification of https://steamcommunity.com/sharedfiles/filedetails/?id=1264802784. Has support for Greed and Greedier mode as well as Mod Config Menu support.</description>
+  <version>2.2</version>
   <visibility />
 </metadata>
