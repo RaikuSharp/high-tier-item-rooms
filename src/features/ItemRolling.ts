@@ -2,7 +2,11 @@ import { ItemPoolType } from "isaac-typescript-definitions";
 import { nextSeed } from "isaacscript-common";
 import { settings } from "../data/settings";
 
-function getItem(itemPoolType: ItemPoolType, decrease: boolean, seed: Seed) {
+export function getItem(
+  itemPoolType: ItemPoolType,
+  decrease: boolean,
+  seed: Seed,
+) {
   let foundItem = false;
   let item: Readonly<ItemConfigItemCollectible> | undefined;
 

@@ -84,6 +84,24 @@ export function modConfigMenuInit() {
     });
 
     ModConfigMenu.AddSetting(name, "Settings", {
+      Type: ModConfigMenuOptionType.BOOLEAN,
+      CurrentSetting: () => {
+        return settings.SINGLE_CHOICE;
+      },
+      Display: () => {
+        let onOff = "Disabled";
+        if (settings.SINGLE_CHOICE) {
+          onOff = "Enabled";
+        }
+        return `Single choice: ${onOff}`;
+      },
+      OnChange: (currentBool) => {
+        settings.SINGLE_CHOICE = currentBool as boolean;
+      },
+      Info: ["Toggle this to either only get one item or all items"],
+    });
+
+    ModConfigMenu.AddSetting(name, "Settings", {
       Type: ModConfigMenuOptionType.NUMBER,
       CurrentSetting: () => {
         return settings.TIER_THRESHOLD;

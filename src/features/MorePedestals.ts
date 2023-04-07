@@ -2,12 +2,29 @@ import {
   CollectibleType,
   EntityType,
   GridEntityType,
-  ItemPoolType,
+  LevelStage,
   PickupVariant,
 } from "isaac-typescript-definitions";
 import { log } from "isaacscript-common";
 import { ReformData } from "../data/ReformData";
 import { settings } from "../data/settings";
+import { getItem } from "./ItemRolling";
+
+function isFirstItemRoom(room: Room) {
+  if (settings.ROOMS.has(room.GetType()) && room.IsFirstVisit()) {
+    if (
+      Game().GetLevel().GetStage() === LevelStage.BASEMENT_1 ||
+      !settings.ALWAYS_ON
+    ) {
+      if (settings.ITEM_COUNT <= 1) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+  }
+  return false;
+}
 
 function roomReform(room: Room, oPos: Vector[]) {
   let roomV = Game().GetLevel().GetCurrentRoomDesc().Data!.Variant;
@@ -105,18 +122,30 @@ export function spawnItems(
 
   log(`Ready to spawn ${positions.length} items`);
   let GRID_POS_WIDTH = 40;
-  for (let i = 1; i <= settings.ITEM_COUNT; i++) {
-    for (let j = 1; j <= positions.length; j++) {
+  for (let i = 0; i <= settings.ITEM_COUNT - 1; i++) {
+    for (let j = 0; j <= positions.length - 1; j++) {
       let pos = positions[j]!.add(OFFSETS[i]!.mul(GRID_POS_WIDTH));
       pos = room.FindFreeTilePosition(pos, GRID_POS_WIDTH / 2);
+
+      let nextSeed = Game().GetSeeds().GetNextSeed();
+      let roomType = Game().GetRoom().GetType();
+      let itemPoolForRoom = Game()
+        .GetItemPool()
+        .GetPoolForRoom(roomType, nextSeed);
 
       let item = CollectibleType.SAD_ONION;
 
       if (itemList.length > 0) {
-        item = itemList[itemList.length - 1]!;
+        let tempItem = Isaac.GetItemConfig().GetCollectible(
+          itemList[itemList.length - 1]!,
+        );
+        if (tempItem!.Quality >= settings.TIER_THRESHOLD) {
+          item = tempItem!.ID;
+        }
         itemList.pop();
       } else {
-        item = Game().GetItemPool().GetCollectible(ItemPoolType.TREASURE);
+        // item = Game().GetItemPool().GetCollectible(ItemPoolType.TREASURE);
+        item = getItem(itemPoolForRoom, false, nextSeed)!;
       }
 
       let spawnedEntity = Game().Spawn(
@@ -128,6 +157,10 @@ export function spawnItems(
         item,
         room.GetSpawnSeed(),
       );
+
+      if (!settings.SINGLE_CHOICE) {
+        spawnedEntity.ToPickup()!.OptionsPickupIndex = 1;
+      }
     }
   }
 }
@@ -139,9 +172,8 @@ let _kPositions: Vector[] = [];
 let _kItemList: number[] = [];
 
 export function postNewRoom() {
-  if (Game().GetRoom().IsFirstVisit()) {
+  if (isFirstItemRoom(Game().GetRoom())) {
     spawnCountDown = 2;
-
     for (let entity of Isaac.GetRoomEntities()) {
       if (
         entity.Type === EntityType.PICKUP &&
