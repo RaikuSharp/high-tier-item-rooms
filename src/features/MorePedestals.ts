@@ -2,7 +2,6 @@ import {
   CollectibleType,
   EntityType,
   GridEntityType,
-  LevelStage,
   PickupVariant,
   RoomType,
 } from "isaac-typescript-definitions";
@@ -17,15 +16,8 @@ function isFirstItemRoom(room: Room) {
     room.IsFirstVisit() &&
     room.GetType() !== RoomType.SHOP
   ) {
-    if (
-      Game().GetLevel().GetStage() === LevelStage.BASEMENT_1 ||
-      !settings.ALWAYS_ON
-    ) {
-      if (settings.ITEM_COUNT <= 1) {
-        return false;
-      } else {
-        return true;
-      }
+    if (settings.ALWAYS_ON) {
+      return true;
     }
   }
   return false;
