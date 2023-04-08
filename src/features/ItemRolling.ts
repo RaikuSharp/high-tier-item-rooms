@@ -42,7 +42,10 @@ export function roll(
   // log(`Room Type is: ${roomType}`);
   // log(`Difficulty is: ${difficulty}`);
 
-  if (roomType === RoomType.SHOP && settings.ROOMS.has(roomType)) {
+  if (
+    (roomType === RoomType.SHOP || roomType == RoomType.DEVIL) &&
+    settings.ROOMS.has(roomType)
+  ) {
     if (!settings.ALWAYS_ON) {
       settings.SPENT_ROLL = true;
     }

@@ -14,7 +14,7 @@ function isFirstItemRoom(room: Room) {
   if (
     settings.ROOMS.has(room.GetType()) &&
     room.IsFirstVisit() &&
-    room.GetType() !== RoomType.SHOP
+    room.GetType() === RoomType.TREASURE
   ) {
     if (settings.ALWAYS_ON) {
       return true;
