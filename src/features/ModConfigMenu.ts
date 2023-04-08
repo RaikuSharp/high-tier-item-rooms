@@ -1,4 +1,4 @@
-import { Difficulty, RoomType } from "isaac-typescript-definitions";
+import { RoomType } from "isaac-typescript-definitions";
 import { settings } from "../data/settings";
 
 function addMCMSetting(
@@ -133,10 +133,10 @@ export function modConfigMenuInit() {
       Info: ["Minimum amount of items to spawn"],
     });
 
-    addMCMSetting("Modes", Difficulty.NORMAL, "Normal Mode", "");
-    addMCMSetting("Modes", Difficulty.HARD, "Hard Mode", "");
-    addMCMSetting("Modes", Difficulty.GREED, "Greed Mode", "");
-    addMCMSetting("Modes", Difficulty.GREEDIER, "Greedier Mode", "");
+    // addMCMSetting("Modes", Difficulty.NORMAL, "Normal Mode", "");
+    // addMCMSetting("Modes", Difficulty.HARD, "Hard Mode", "");
+    // addMCMSetting("Modes", Difficulty.GREED, "Greed Mode", "");
+    // addMCMSetting("Modes", Difficulty.GREEDIER, "Greedier Mode", "");
 
     addMCMSetting("Rooms", RoomType.SHOP, "Shop", "");
     addMCMSetting("Rooms", RoomType.TREASURE, "Treasure room", "");

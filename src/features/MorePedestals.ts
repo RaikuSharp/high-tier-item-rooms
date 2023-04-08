@@ -4,6 +4,7 @@ import {
   GridEntityType,
   LevelStage,
   PickupVariant,
+  RoomType,
 } from "isaac-typescript-definitions";
 import { log } from "isaacscript-common";
 import { ReformData } from "../data/ReformData";
@@ -11,7 +12,11 @@ import { settings } from "../data/settings";
 import { getItem } from "./ItemRolling";
 
 function isFirstItemRoom(room: Room) {
-  if (settings.ROOMS.has(room.GetType()) && room.IsFirstVisit()) {
+  if (
+    settings.ROOMS.has(room.GetType()) &&
+    room.IsFirstVisit() &&
+    room.GetType() !== RoomType.SHOP
+  ) {
     if (
       Game().GetLevel().GetStage() === LevelStage.BASEMENT_1 ||
       !settings.ALWAYS_ON
@@ -133,7 +138,7 @@ export function spawnItems(
         .GetItemPool()
         .GetPoolForRoom(roomType, nextSeed);
 
-      let item = CollectibleType.SAD_ONION;
+      let item = getItem(itemPoolForRoom, false, nextSeed)!;
 
       if (itemList.length > 0) {
         let tempItem = Isaac.GetItemConfig().GetCollectible(
@@ -143,9 +148,6 @@ export function spawnItems(
           item = tempItem!.ID;
         }
         itemList.pop();
-      } else {
-        // item = Game().GetItemPool().GetCollectible(ItemPoolType.TREASURE);
-        item = getItem(itemPoolForRoom, false, nextSeed)!;
       }
 
       let spawnedEntity = Game().Spawn(
@@ -158,7 +160,7 @@ export function spawnItems(
         room.GetSpawnSeed(),
       );
 
-      if (!settings.SINGLE_CHOICE) {
+      if (settings.SINGLE_CHOICE) {
         spawnedEntity.ToPickup()!.OptionsPickupIndex = 1;
       }
     }
