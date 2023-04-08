@@ -9,5 +9,5 @@ export let settings = {
   MODES: new Set<Difficulty>(),
   ROOMS: new Set<RoomType>(),
   IS_COOP: true,
-  _VERSION: "2.0",
+  _VERSION: "2.6.1",
 };

@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <metadata>
-    <name>Higher Tier Item Rooms</name>
-    <directory>higher-tier-item-rooms</directory>
-    <id>2950589929</id>
-    <description>A modification of https://steamcommunity.com/sharedfiles/filedetails/?id=1264802784. Has support for Greed and Greedier mode as well as Mod Config Menu support.</description>
-    <version>2.6</version>
-    <visibility>Public</visibility>
-    <tag id="Lua"/>
-    <tag id="Tweaks"/>
+  <name>Higher Tier Item Rooms</name>
+  <directory>higher-tier-item-rooms</directory>
+  <id>2950589929</id>
+  <description>A modification of https://steamcommunity.com/sharedfiles/filedetails/?id=1264802784. Has support for Greed and Greedier mode as well as Mod Config Menu support.</description>
+  <version>2.6.1</version>
+  <visibility>Public</visibility>
+  <tag id="Lua" />
+  <tag id="Tweaks" />
 </metadata>
