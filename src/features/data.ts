@@ -33,6 +33,9 @@ export function loadSettings(isContinue: boolean, mod: Mod) {
 
       const itemCount = deserialized.get("item_count") as number;
       settings.ITEM_COUNT = itemCount;
+
+      const single_choice = deserialized.get("single_choice") as boolean;
+      settings.SINGLE_CHOICE = single_choice;
     }
   }
 }
@@ -54,6 +57,7 @@ export function saveSettings(mod: Mod) {
     version: settings._VERSION,
     item_tier: settings.TIER_THRESHOLD,
     item_count: settings.ITEM_COUNT,
+    single_choice: settings.SINGLE_CHOICE,
   };
 
   mod.SaveData(jsonEncode(toSerialize));
