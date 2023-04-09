@@ -2,6 +2,7 @@ import {
   CollectibleType,
   EntityType,
   GridEntityType,
+  LevelStage,
   PickupVariant,
   RoomType,
 } from "isaac-typescript-definitions";
@@ -11,16 +12,17 @@ import { settings } from "../data/settings";
 import { getItem } from "./ItemRolling";
 
 function isFirstItemRoom(room: Room) {
-  if (
-    (settings.ROOMS.has(room.GetType()) &&
-      room.IsFirstVisit() &&
-      room.GetType() !== RoomType.SHOP) ||
-    room.GetType() !== RoomType.DEVIL
-  ) {
-    if (settings.ALWAYS_ON) {
-      return true;
+  if (settings.ROOMS.has(room.GetType()) && room.IsFirstVisit()) {
+    if (room.GetType() !== RoomType.SHOP && room.GetType() !== RoomType.DEVIL) {
+      if (
+        Game().GetLevel().GetStage() === LevelStage.BASEMENT_1 ||
+        settings.ALWAYS_ON
+      ) {
+        return true;
+      }
     }
   }
+
   return false;
 }
 

@@ -75,12 +75,12 @@ export function modConfigMenuInit() {
         if (settings.ALWAYS_ON) {
           onOff = "Enabled";
         }
-        return `All Item Rooms: ${onOff}`;
+        return `Always on: ${onOff}`;
       },
       OnChange: (currentBool) => {
         settings.ALWAYS_ON = currentBool as boolean;
       },
-      Info: ["Toggle this setting to reroll every enabled room"],
+      Info: ["Setting to keep the mod on for the entire game."],
     });
 
     ModConfigMenu.AddSetting(name, "Settings", {
