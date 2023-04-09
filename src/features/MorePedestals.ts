@@ -12,11 +12,10 @@ import { getItem } from "./ItemRolling";
 
 function isFirstItemRoom(room: Room) {
   if (
-    settings.ROOMS.has(room.GetType()) &&
-    room.IsFirstVisit() &&
-    (room.GetType() === RoomType.TREASURE ||
-      room.GetType() === RoomType.ANGEL ||
-      room.GetType() == RoomType.PLANETARIUM)
+    (settings.ROOMS.has(room.GetType()) &&
+      room.IsFirstVisit() &&
+      room.GetType() !== RoomType.SHOP) ||
+    room.GetType() !== RoomType.DEVIL
   ) {
     if (settings.ALWAYS_ON) {
       return true;
