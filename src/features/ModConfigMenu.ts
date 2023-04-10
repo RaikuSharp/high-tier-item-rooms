@@ -75,12 +75,12 @@ export function modConfigMenuInit() {
         if (settings.ALWAYS_ON) {
           onOff = "Enabled";
         }
-        return `Always on: ${onOff}`;
+        return `First Floor Only: ${onOff}`;
       },
       OnChange: (currentBool) => {
         settings.ALWAYS_ON = currentBool as boolean;
       },
-      Info: ["Setting to keep the mod on for the entire game."],
+      Info: ["Toggle to enable only for the first floor"],
     });
 
     ModConfigMenu.AddSetting(name, "Settings", {
